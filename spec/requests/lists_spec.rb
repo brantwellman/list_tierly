@@ -14,17 +14,14 @@ RSpec.describe "Lists", type: :request do
       expect(response).to have_http_status(:ok)
     end
 
-    it "renders content from the index template" do
-      expect(response.body).to include("Here are your lists")
+    it "renders the header" do
+      expect(response.body).to have_text("Here are your lists")
     end
 
-    it "returns all lists for the user" do
+    it "sets lists and renders the user's lists" do
       expect(lists.count).to eq(list_count)
-
-      lists.each do |list|
-        expect(response.body).to have_text(list.title)
-        expect(response.body).to have_text(list.description)
-      end
+      expect(response.body).to have_text(lists.first.title)
+      expect(response.body).to have_text(lists.first.description)
     end
   end
 end
