@@ -22,8 +22,8 @@ RSpec.describe "Lists", type: :request do
       expect(lists.count).to eq(list_count)
 
       lists.each do |list|
-        expect(response.body).to have_css("div", text: "#{list.title}")
-        expect(response.body).to have_css("div", text: "#{list.description}")
+        expect(response.body).to have_text(list.title)
+        expect(response.body).to have_text(list.description)
       end
     end
   end
